@@ -34,6 +34,13 @@ const useStyles = makeStyles(theme => ({
 		"& > *": {
 			margin: theme.spacing(0)
 		}
+	},
+	CompleteButton: {
+		justifyContent: "center",
+		position: "absolute", //Here is the trick
+		width: "100%",
+		alignItems: "center",
+		bottom: 65
 	}
 }));
 
@@ -295,7 +302,7 @@ export default function ControlledExpansionPanels() {
 					</div>
 				</ExpansionPanelDetails>
 			</ExpansionPanel>
-			<div className={classes.buttongrid}>
+			<div className={classes.CompleteButton}>
 				<Fab color="secondary" variant="extended">
 					Workout Complete
 				</Fab>
