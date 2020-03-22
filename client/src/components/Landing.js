@@ -10,6 +10,11 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Fab from "@material-ui/core/Fab";
+import Icon from "@material-ui/core/Icon";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import WodList from "./Wods/WodList";
+
+const mongoose = require("mongoose");
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -37,279 +42,288 @@ const useStyles = makeStyles(theme => ({
 	},
 	CompleteButton: {
 		justifyContent: "center",
-		position: "absolute", //Here is the trick
+		position: "absolute",
 		width: "100%",
 		alignItems: "center",
-		bottom: 65
+		bottom: 65,
+		margin: "0 auto",
+		textAlign: "center"
 	}
 }));
 
 export default function ControlledExpansionPanels() {
 	const classes = useStyles();
 	const [expanded, setExpanded] = React.useState(false);
-
 	const handleChange = panel => (event, isExpanded) => {
 		setExpanded(isExpanded ? panel : false);
 	};
 
-	return (
-		<div className={classes.root}>
-			<ExpansionPanel
-				expanded={expanded === "panel1"}
-				onChange={handleChange("panel1")}
-			>
-				<ExpansionPanelSummary
-					expandIcon={<ExpandMoreIcon />}
-					aria-controls="panel1bh-content"
-					id="panel1bh-header"
-				>
-					<Typography className={classes.heading}>
-						Bench Press
-					</Typography>
-					<Typography className={classes.secondaryHeading}>
-						5x5 @ 235lbs
-					</Typography>
-				</ExpansionPanelSummary>
-				<ExpansionPanelDetails>
-					<div className={classes.buttongrid}>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						>
-							<Button>Set: 1</Button>
-							<Button>R: 5</Button>
-							<Button>W: 235</Button>
-						</ButtonGroup>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						>
-							<Button>set: 2</Button>
-							<Button>r: 5</Button>
-							<Button>w: 235</Button>
-						</ButtonGroup>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						>
-							<Button>set: 3</Button>
-							<Button>r: 5</Button>
-							<Button>w: 235</Button>
-						</ButtonGroup>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						>
-							<Button>set: 4</Button>
-							<Button>r: 5</Button>
-							<Button>w: 235</Button>
-						</ButtonGroup>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						>
-							<Button>set: 5</Button>
-							<Button>r: 5</Button>
-							<Button>w: 235</Button>
-						</ButtonGroup>
-					</div>
-				</ExpansionPanelDetails>
-			</ExpansionPanel>
-			<ExpansionPanel
-				expanded={expanded === "panel2"}
-				onChange={handleChange("panel2")}
-			>
-				<ExpansionPanelSummary
-					expandIcon={<ExpandMoreIcon />}
-					aria-controls="panel2bh-content"
-					id="panel2bh-header"
-				>
-					<Typography className={classes.heading}>
-						Incline Press
-					</Typography>
-					<Typography className={classes.secondaryHeading}>
-						4x10 @ 70lbs
-					</Typography>
-				</ExpansionPanelSummary>
-				<ExpansionPanelDetails>
-					<div className={classes.buttongrid}>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						>
-							<Button>Set: 1</Button>
-							<Button>R: 10</Button>
-							<Button>W: 70</Button>
-						</ButtonGroup>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						>
-							<Button>set: 2</Button>
-							<Button>r: 10</Button>
-							<Button>w: 70</Button>
-						</ButtonGroup>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						>
-							<Button>set: 3</Button>
-							<Button>r: 10</Button>
-							<Button>w: 70</Button>
-						</ButtonGroup>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						>
-							<Button>set: 4</Button>
-							<Button>r: 10</Button>
-							<Button>w: 70</Button>
-						</ButtonGroup>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						></ButtonGroup>
-					</div>
-				</ExpansionPanelDetails>
-			</ExpansionPanel>
-			<ExpansionPanel
-				expanded={expanded === "panel3"}
-				onChange={handleChange("panel3")}
-			>
-				<ExpansionPanelSummary
-					expandIcon={<ExpandMoreIcon />}
-					aria-controls="panel3bh-content"
-					id="panel3bh-header"
-				>
-					<Typography className={classes.heading}>DB Fly</Typography>
-					<Typography className={classes.secondaryHeading}>
-						4x10 @ 45lbs
-					</Typography>
-				</ExpansionPanelSummary>
-				<ExpansionPanelDetails>
-					<div className={classes.buttongrid}>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						>
-							<Button>Set: 1</Button>
-							<Button>R: 10</Button>
-							<Button>W: 45</Button>
-						</ButtonGroup>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						>
-							<Button>set: 2</Button>
-							<Button>r: 10</Button>
-							<Button>w: 45</Button>
-						</ButtonGroup>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						>
-							<Button>set: 3</Button>
-							<Button>r: 10</Button>
-							<Button>w: 45</Button>
-						</ButtonGroup>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						>
-							<Button>set: 4</Button>
-							<Button>r: 10</Button>
-							<Button>w: 45</Button>
-						</ButtonGroup>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						></ButtonGroup>
-					</div>
-				</ExpansionPanelDetails>
-			</ExpansionPanel>
-			<ExpansionPanel
-				expanded={expanded === "panel4"}
-				onChange={handleChange("panel4")}
-			>
-				<ExpansionPanelSummary
-					expandIcon={<ExpandMoreIcon />}
-					aria-controls="panel4bh-content"
-					id="panel4bh-header"
-				>
-					<Typography className={classes.heading}>Pushups</Typography>
-					<Typography className={classes.secondaryHeading}>
-						4x15 @ BW
-					</Typography>
-				</ExpansionPanelSummary>
-				<ExpansionPanelDetails>
-					<div className={classes.buttongrid}>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						>
-							<Button>Set: 1</Button>
-							<Button>R: 15</Button>
-							<Button>W: BW</Button>
-						</ButtonGroup>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						>
-							<Button>set: 2</Button>
-							<Button>r: 15</Button>
-							<Button>w: BW</Button>
-						</ButtonGroup>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						>
-							<Button>set: 3</Button>
-							<Button>r: 15</Button>
-							<Button>w: BW</Button>
-						</ButtonGroup>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						>
-							<Button>set: 4</Button>
-							<Button>r: 15</Button>
-							<Button>w: BW</Button>
-						</ButtonGroup>
-						<ButtonGroup
-							size="large"
-							color="primary"
-							aria-label="outlined primary button group"
-						></ButtonGroup>
-					</div>
-				</ExpansionPanelDetails>
-			</ExpansionPanel>
-			<div className={classes.CompleteButton}>
-				<Fab color="secondary" variant="extended">
-					Workout Complete
-				</Fab>
-			</div>
-		</div>
-	);
+	return <div>test</div>;
 }
+// 	return (
+// 		<div className={classes.root}>
+// 			<h5>Foundation</h5>
+// 			<ExpansionPanel
+// 				expanded={expanded === "panel1"}
+// 				onChange={handleChange("panel1")}
+// 			>
+// 				<ExpansionPanelSummary
+// 					expandIcon={<ExpandMoreIcon />}
+// 					aria-controls="panel1bh-content"
+// 					id="panel1bh-header"
+// 				>
+// 					<Typography className={classes.heading}>
+// 						Bench Press
+// 					</Typography>
+// 					<Typography className={classes.secondaryHeading}>
+// 						5x5 @ 235lbs
+// 					</Typography>
+// 				</ExpansionPanelSummary>
+// 				<ExpansionPanelDetails>
+// 					<div className={classes.buttongrid}>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						>
+// 							<Button>Set: 1</Button>
+// 							<Button>R: 5</Button>
+// 							<Button>W: 235</Button>
+// 							<Button>X</Button>
+// 						</ButtonGroup>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						>
+// 							<Button>set: 2</Button>
+// 							<Button>r: 5</Button>
+// 							<Button>w: 235</Button>
+// 							<Button>X</Button>
+// 						</ButtonGroup>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						>
+// 							<Button>set: 3</Button>
+// 							<Button>r: 5</Button>
+// 							<Button>w: 235</Button>
+// 							<Button>X</Button>
+// 						</ButtonGroup>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						>
+// 							<Button>set: 4</Button>
+// 							<Button>r: 5</Button>
+// 							<Button>w: 235</Button>
+// 							<Button>X</Button>
+// 						</ButtonGroup>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						>
+// 							<Button>set: 5</Button>
+// 							<Button>r: 5</Button>
+// 							<Button>w: 235</Button>
+// 							<Button>X</Button>
+// 						</ButtonGroup>
+// 					</div>
+// 				</ExpansionPanelDetails>
+// 			</ExpansionPanel>
+// 			<ExpansionPanel
+// 				expanded={expanded === "panel2"}
+// 				onChange={handleChange("panel2")}
+// 			>
+// 				<ExpansionPanelSummary
+// 					expandIcon={<ExpandMoreIcon />}
+// 					aria-controls="panel2bh-content"
+// 					id="panel2bh-header"
+// 				>
+// 					<Typography className={classes.heading}>
+// 						Incline Press
+// 					</Typography>
+// 					<Typography className={classes.secondaryHeading}>
+// 						4x10 @ 70lbs
+// 					</Typography>
+// 				</ExpansionPanelSummary>
+// 				<ExpansionPanelDetails>
+// 					<div className={classes.buttongrid}>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						>
+// 							<Button>Set: 1</Button>
+// 							<Button>R: 10</Button>
+// 							<Button>W: 70</Button>
+// 						</ButtonGroup>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						>
+// 							<Button>set: 2</Button>
+// 							<Button>r: 10</Button>
+// 							<Button>w: 70</Button>
+// 						</ButtonGroup>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						>
+// 							<Button>set: 3</Button>
+// 							<Button>r: 10</Button>
+// 							<Button>w: 70</Button>
+// 						</ButtonGroup>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						>
+// 							<Button>set: 4</Button>
+// 							<Button>r: 10</Button>
+// 							<Button>w: 70</Button>
+// 						</ButtonGroup>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						></ButtonGroup>
+// 					</div>
+// 				</ExpansionPanelDetails>
+// 			</ExpansionPanel>
+// 			<ExpansionPanel
+// 				expanded={expanded === "panel3"}
+// 				onChange={handleChange("panel3")}
+// 			>
+// 				<ExpansionPanelSummary
+// 					expandIcon={<ExpandMoreIcon />}
+// 					aria-controls="panel3bh-content"
+// 					id="panel3bh-header"
+// 				>
+// 					<Typography className={classes.heading}>DB Fly</Typography>
+// 					<Typography className={classes.secondaryHeading}>
+// 						4x10 @ 45lbs
+// 					</Typography>
+// 				</ExpansionPanelSummary>
+// 				<ExpansionPanelDetails>
+// 					<div className={classes.buttongrid}>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						>
+// 							<Button>Set: 1</Button>
+// 							<Button>R: 10</Button>
+// 							<Button>W: 45</Button>
+// 						</ButtonGroup>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						>
+// 							<Button>set: 2</Button>
+// 							<Button>r: 10</Button>
+// 							<Button>w: 45</Button>
+// 						</ButtonGroup>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						>
+// 							<Button>set: 3</Button>
+// 							<Button>r: 10</Button>
+// 							<Button>w: 45</Button>
+// 						</ButtonGroup>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						>
+// 							<Button>set: 4</Button>
+// 							<Button>r: 10</Button>
+// 							<Button>w: 45</Button>
+// 						</ButtonGroup>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						></ButtonGroup>
+// 					</div>
+// 				</ExpansionPanelDetails>
+// 			</ExpansionPanel>
+// 			<ExpansionPanel
+// 				expanded={expanded === "panel4"}
+// 				onChange={handleChange("panel4")}
+// 			>
+// 				<ExpansionPanelSummary
+// 					expandIcon={<ExpandMoreIcon />}
+// 					aria-controls="panel4bh-content"
+// 					id="panel4bh-header"
+// 				>
+// 					<Typography className={classes.heading}>Pushups</Typography>
+// 					<Typography className={classes.secondaryHeading}>
+// 						4x15 @ BW
+// 					</Typography>
+// 				</ExpansionPanelSummary>
+// 				<ExpansionPanelDetails>
+// 					<div className={classes.buttongrid}>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						>
+// 							<Button>Set: 1</Button>
+// 							<Button>R: 15</Button>
+// 							<Button>W: BW</Button>
+// 						</ButtonGroup>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						>
+// 							<Button>set: 2</Button>
+// 							<Button>r: 15</Button>
+// 							<Button>w: BW</Button>
+// 						</ButtonGroup>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						>
+// 							<Button>set: 3</Button>
+// 							<Button>r: 15</Button>
+// 							<Button>w: BW</Button>
+// 						</ButtonGroup>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						>
+// 							<Button>set: 4</Button>
+// 							<Button>r: 15</Button>
+// 							<Button>w: BW</Button>
+// 						</ButtonGroup>
+// 						<ButtonGroup
+// 							size="large"
+// 							color="primary"
+// 							aria-label="outlined primary button group"
+// 						></ButtonGroup>
+// 					</div>
+// 				</ExpansionPanelDetails>
+// 			</ExpansionPanel>
+// 			<div className={classes.CompleteButton}>
+// 				<Fab color="secondary" variant="extended">
+// 					Workout Complete
+// 				</Fab>
+// 			</div>
+// 		</div>
+// 	);
+// }
 
 // import React from "react";
 

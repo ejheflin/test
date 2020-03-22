@@ -12,22 +12,20 @@ const SurveyNew = () => <h2>SurveyNew</h2>;
 class App extends Component {
 	componentDidMount() {
 		this.props.fetchUser();
+		this.props.fetchWOD();
 	}
+
 	render() {
 		return (
-			<div>
-				<BrowserRouter>
-					<div>
-						<Header />
-						<Route exact path="/" component={Landing} />
-						<Route exact path="/surveys" component={Dashboard} />
-						<Route path="/surveys/new" component={SurveyNew} />
-						<Navbar />
-					</div>
-				</BrowserRouter>
-			</div>
+			<BrowserRouter>
+				<div>
+					<Header />
+					<Route exact path="/" component={Landing} />
+					<Route exact path="/surveys" component={Dashboard} />
+					<Route path="/surveys/new" component={SurveyNew} />
+				</div>
+			</BrowserRouter>
 		);
 	}
 }
-
 export default connect(null, actions)(App);
